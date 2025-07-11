@@ -45,7 +45,7 @@
     "cors": "^2.8.5",
     "crypto": "latest",
     "csurf": "latest",
-    "date-fns": "4.1.0",
+    "date-fns": "3.0.0",
     "dotenv": "latest",
     "embla-carousel-react": "8.5.1",
     "express": "latest",
