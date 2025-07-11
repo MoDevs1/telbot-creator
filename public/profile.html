@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - TeleBot Creator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bot-creator.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="creator-body">
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor-custom"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="creator-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>TeleBot Creator</span>
+                </div>
+                <div class="breadcrumb">
+                    <a href="bot-creator.html">لوحة التحكم</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>الملف الشخصي</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="header-user-name">جاري التحميل...</span>
+                        <span class="user-plan" id="header-user-plan">جاري التحميل...</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="creator-main">
+        <div class="profile-container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <div class="cover-overlay"></div>
+                    <button class="change-cover-btn" id="change-cover-btn">
+                        <i class="fas fa-camera"></i>
+                        تغيير الغلاف
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar">
+                            <img id="profile-avatar-img" src="/placeholder.svg?height=120&width=120" alt="صورة المستخدم" style="display: none;">
+                            <i class="fas fa-user-circle" id="default-avatar"></i>
+                            <button class="change-avatar-btn" id="change-avatar-btn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                            <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-details">
+                            <h1 class="profile-name" id="profile-name">جاري التحميل...</h1>
+                            <p class="profile-email" id="profile-email">جاري التحميل...</p>
+                            <div class="profile-badges">
+                                <span class="badge" id="plan-badge">
+                                    <i class="fas fa-crown"></i>
+                                    <span id="plan-text">جاري التحميل...</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" id="edit-profile-btn">
+                            <i class="fas fa-edit"></i>
+                            تعديل الملف الشخصي
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Stats Section -->
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-bots">0</div>
+                            <div class="stat-label">البوتات</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="active-bots">0</div>
+                            <div class="stat-label">نشط</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="pending-bots">0</div>
+                            <div class="stat-label">قيد المراجعة</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="member-since">0</div>
+                            <div class="stat-label">أيام العضوية</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3>المعلومات الشخصية</h3>
+                        <button class="edit-btn" id="edit-info-btn">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item">
+                            <label>الاسم الكامل:</label>
+                            <span id="full-name">جاري التحميل...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>البريد الإلكتروني:</label>
+                            <span id="email-display">جاري التحميل...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>رقم الهاتف:</label>
+                            <span id="phone-display">غير محدد</span>
+                        </div>
+                        <div class="info-item">
+                            <label>تاريخ الانضمام:</label>
+                            <span id="join-date">جاري التحميل...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>نوع الحساب:</label>
+                            <span id="account-type">جاري التحميل...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Bots -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3>البوتات الخاصة بي</h3>
+                        <a href="bot-creator.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            إنشاء بوت جديد
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div id="bots-list">
+                            <div class="loading-message">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                جاري تحميل البوتات...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تعديل الملف الشخصي</h3>
+                <button class="modal-close" id="close-edit-profile">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="firstName">الاسم الأول</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">الاسم الأخير</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" placeholder="+20 123 456 7890">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" id="cancel-edit">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avatar Upload Modal -->
+    <div id="avatarUploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تغيير الصورة الشخصية</h3>
+                <button class="modal-close" id="close-avatar-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-upload-area">
+                    <div class="avatar-preview">
+                        <img id="avatar-preview-img" src="/placeholder.svg" alt="معاينة الصورة">
+                        <div class="avatar-overlay">
+                            <i class="fas fa-camera"></i>
+                            <p>اختر صورة</p>
+                        </div>
+                    </div>
+                    <div class="upload-instructions">
+                        <p>اختر صورة بحجم أقل من 5 ميجابايت</p>
+                        <p>الصيغ المدعومة: JPG, PNG, GIF</p>
+                    </div>
+                    <div class="upload-actions">
+                        <button type="button" class="btn btn-outline" id="select-avatar-btn">
+                            <i class="fas fa-upload"></i>
+                            اختيار صورة
+                        </button>
+                        <button type="button" class="btn btn-primary" id="upload-avatar-btn" disabled>
+                            <i class="fas fa-save"></i>
+                            حفظ الصورة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

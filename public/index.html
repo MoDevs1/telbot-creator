@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleBot Creator - إنشاء بوتات تليجرام</title>
+    <meta name="description" content="منصة متقدمة لإنشاء وإدارة بوتات تليجرام بسهولة وبدون برمجة">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/user-menu.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor-custom"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-robot nav-icon"></i>
+            <span class="nav-title">TeleBot Creator</span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="nav-desktop">
+            <div class="nav-links">
+                <a href="#features" class="nav-link">المميزات</a>
+                <a href="#how-it-works" class="nav-link">كيف يعمل</a>
+                <a href="#pricing" class="nav-link">الأسعار</a>
+                <a href="#contact" class="nav-link">تواصل معنا</a>
+            </div>
+
+            <div class="nav-buttons">
+                <!-- أزرار تسجيل الدخول للمستخدمين غير المسجلين -->
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">
+                        <i class="fas fa-sign-in-alt"></i>
+                        تسجيل الدخول
+                    </a>
+                    <a href="signup.html" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        إنشاء حساب
+                    </a>
+                </div>
+
+                <!-- قائمة المستخدم للمستخدمين المسجلين -->
+                <div id="user-menu" class="user-menu" style="display: none;">
+                    <div class="user-welcome">
+                        <span class="welcome-text">أهلاً، </span> 
+                        <span id="username-display" class="username"></span>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn" onclick="toggleUserDropdown()">
+                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div id="user-dropdown-menu" class="user-dropdown-menu">
+                            <a href="bot-creator.html" class="dropdown-item">
+                                <i class="fas fa-robot"></i>
+                                إنشاء البوتات
+                            </a>
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                الملف الشخصي
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                الإعدادات
+                            </a>
+                            <a href="analytics.html" class="dropdown-item">
+                                <i class="fas fa-chart-bar"></i>
+                                الإحصائيات
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button onclick="logout()" class="dropdown-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                تسجيل الخروج
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="nav-mobile">
+            <!-- أزرار الموبايل للمستخدمين غير المسجلين -->
+            <div id="auth-buttons-mobile" class="auth-buttons-mobile">
+                <a href="login.html" class="btn btn-outline btn-sm">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+                <a href="signup.html" class="btn btn-primary btn-sm">
+                    <i class="fas fa-user-plus"></i>
+                </a>
+            </div>
+
+            <!-- قائمة المستخدم للموبايل -->
+            <div id="user-menu-mobile" class="user-menu-mobile" style="display: none;">
+                <button class="user-menu-btn" onclick="toggleMobileUserMenu()">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+                <div id="mobile-user-dropdown" class="mobile-user-dropdown">
+                    <div class="mobile-user-header">
+                        <span class="mobile-welcome"></span> 
+                        <span id="username-display-mobile" class="mobile-username"></span>
+                    </div>
+                    <a href="/public/bot-creator.html" class="mobile-dropdown-item">
+                        <i class="fas fa-robot"></i>
+                        إنشاء البوتات
+                    </a>
+                    <a href="/public/profile.html" class="mobile-dropdown-item">
+                        <i class="fas fa-user"></i>
+                        الملف الشخصي
+                    </a>
+                    <a href="/public/settings.html" class="mobile-dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        الإعدادات
+                    </a>
+                    <a href="/public/analytics.html" class="mobile-dropdown-item">
+                        <i class="fas fa-chart-bar"></i>
+                        الإحصائيات
+                    </a>
+                    <button onclick="logout()" class="mobile-dropdown-item logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title animate-element">
+            أنشئ بوت تليجرام<br>في دقائق
+        </h1>
+        <p class="hero-subtitle animate-element">
+            منصة متقدمة لإنشاء وإدارة بوتات تليجرام بسهولة وبدون برمجة
+        </p>
+        <button class="hero-button btn btn-large animate-element" onclick="scrollToSection('pricing')">
+            ابدأ الآن
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">لماذا تختار منصتنا؟</h2>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">سرعة فائقة</h3>
+                    <p class="feature-description">إنشاء البوتات في ثوانٍ معدودة</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">أمان عالي</h3>
+                    <p class="feature-description">حماية متقدمة لبياناتك وبوتاتك</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="feature-title">أداء محسن</h3>
+                    <p class="feature-description">بوتات سريعة ومستقرة على مدار الساعة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">كيف يعمل الموقع؟</h2>
+            <p class="section-subtitle animate-on-scroll">ثلاث خطوات بسيطة لإنشاء بوت تليجرام احترافي</p>
+
+            <div class="steps-container">
+                <!-- Connection Lines -->
+                <div class="connection-line line-1"></div>
+                <div class="connection-line line-2"></div>
+
+                <div class="steps-grid">
+                    <div class="step-card animate-on-scroll floating-card">
+                        <div class="step-number step-1">01</div>
+                        <div class="step-content">
+                            <div class="step-icon">🎯</div>
+                            <h3 class="step-title">اختر القالب</h3>
+                            <p class="step-description">اختر من مجموعة واسعة من القوالب الجاهزة أو ابدأ من الصفر</p>
+                        </div>
+                    </div>
+                    <div class="step-card animate-on-scroll floating-card">
+                        <div class="step-number step-2">02</div>
+                        <div class="step-content">
+                            <div class="step-icon">⚙️</div>
+                            <h3 class="step-title">خصص البوت</h3>
+                            <p class="step-description">أضف الميزات والأوامر والردود التلقائية بسهولة تامة</p>
+                        </div>
+                    </div>
+                    <div class="step-card animate-on-scroll floating-card">
+                        <div class="step-number step-3">03</div>
+                        <div class="step-content">
+                            <div class="step-icon">🚀</div>
+                            <h3 class="step-title">انشر واستمتع</h3>
+                            <p class="step-description">انشر بوتك على تليجرام واستمتع بالنتائج المذهلة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-cta">
+                <button class="btn btn-large btn-gradient animate-on-scroll" onclick="scrollToSection('pricing')">
+                    ابدأ رحلتك الآن
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">خطط الأسعار</h2>
+            <p class="section-subtitle animate-on-scroll">اختر الخطة المناسبة لاحتياجاتك</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card animate-on-scroll">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">المجانية</h3>
+                        <div class="pricing-price">
+                            <span class="price">$0</span>
+                            <span class="period">/مجاناً</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> بوت واحد</li>
+                            <li><i class="fas fa-check"></i> دعم أساسي</li>
+                            <li><i class="fas fa-check"></i> قوالب محدودة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pricing-card popular animate-on-scroll">
+                    <div class="popular-badge">الأكثر شعبية</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">المتقدمة</h3>
+                        <div class="pricing-price">
+                            <span class="price">$10</span>
+                            <span class="period">/شهرياً</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 5 بوتات</li>
+                            <li><i class="fas fa-check"></i> دعم متقدم</li>
+                            <li><i class="fas fa-check"></i> جميع القوالب</li>
+                            <li><i class="fas fa-check"></i> تحليلات مفصلة</li>
+                            <li><i class="fas fa-check"></i> API متقدم</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">بوت تم إنشاؤه</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">مستخدم نشط</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">وقت التشغيل</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">تواصل معنا</h2>
+            <p class="section-subtitle animate-on-scroll">نحن هنا لمساعدتك في أي وقت</p>
+
+            <div class="contact-container">
+                <div class="contact-info animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>البريد الإلكتروني</h4>
+                            <p>mt1817221@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>واتساب</h4>
+                            <p>+20 106 175 8254</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>تليجرام</h4>
+                            <p>@TeleBotCreator</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>ساعات العمل</h4>
+                            <p>24/7 دعم على مدار الساعة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container animate-on-scroll">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف (اختياري)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">الموضوع</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">اختر الموضوع</option>
+                                <option value="support">دعم فني</option>
+                                <option value="complaint">شكوى</option>
+                                <option value="suggestion">اقتراح</option>
+                                <option value="partnership">شراكة</option>
+                                <option value="other">أخرى</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fas fa-robot"></i>
+                <span>TeleBot Creator</span>
+            </div>
+            <p>© 2025 جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h3>تم إرسال الرسالة بنجاح!</h3>
+            </div>
+            <div class="modal-body">
+                <p>شكراً لتواصلك معنا. سنقوم بالرد عليك في أقرب وقت ممكن.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="btn btn-primary">حسناً</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userLang = navigator.language || navigator.userLanguage;
+        if(!userLang.startsWith("ar")){
+            document.documentElement.dir = "ltr";
+            document.documentElement.lang = userLang.split("-")[0];
+        }else{
+            document.documentElement.dir = "rtl";
+            document.documentElement.lang = "ar";
+        }
+
+        // ✅ تحميل بيانات المستخدم
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const res = await fetch("/api/me", { credentials: "include" });
+                if (!res.ok) throw new Error();
+                
+                const data = await res.json();
+                
+                // إخفاء أزرار تسجيل الدخول
+                document.getElementById("auth-buttons").style.display = "none";
+                document.getElementById("auth-buttons-mobile").style.display = "none";
+                
+                // عرض قائمة المستخدم
+                document.getElementById("user-menu").style.display = "flex";
+                document.getElementById("user-menu-mobile").style.display = "flex";
+                
+                document.getElementById("username-display").textContent = data.user.firstName;
+                document.getElementById("username-display-mobile").textContent = data.user.firstName;
+                const first = data.user.firstName || "";
+                const last = data.user.lastName || "";
+                document.querySelector(".mobile-welcome").textContent = `أهلاً,${first} ${last}`.trim();
+
+            } catch (err) {
+                // المستخدم غير مسجل دخول
+                document.getElementById("user-menu").style.display = "none";
+                document.getElementById("user-menu-mobile").style.display = "none";
+            }
+        });
+
+        // ✅ عرض / إخفاء القائمة المنسدلة للمستخدم (ديسكتوب)
+        function toggleUserDropdown() {
+            const dropdown = document.querySelector(".user-dropdown");
+            dropdown.classList.toggle("active");
+        }
+
+        // ✅ عرض / إخفاء القائمة للموبايل
+        function toggleMobileUserMenu() {
+            const mobileMenu = document.querySelector(".user-menu-mobile");
+            mobileMenu.classList.toggle("active");
+        }
+
+        // ✅ تسجيل الخروج
+        function logout() {
+            fetch("/api/logout", {
+                method: "POST",
+                credentials: "include"
+            }).then(() => {
+                window.location.href = "/login.html";
+            });
+        }
+
+        // ✅ التمرير إلى قسم معين
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ✅ معالجة نموذج التواصل
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    document.getElementById('successModal').style.display = 'flex';
+                    this.reset();
+                } else {
+                    alert('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+            }
+        });
+
+        // ✅ إغلاق النافذة المنبثقة
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

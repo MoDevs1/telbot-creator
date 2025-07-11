@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - TeleBot Creator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bot-creator.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="creator-body">
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor-custom"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="creator-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>TeleBot Creator</span>
+                </div>
+                <div class="breadcrumb">
+                    <a href="bot-creator.html">لوحة التحكم</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>الإعدادات</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="header-user-name">جاري التحميل...</span>
+                        <span class="user-plan" id="header-user-plan">جاري التحميل...</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="creator-main">
+        <div class="settings-container">
+            <!-- Settings Header -->
+            <div class="settings-header">
+                <h1>الإعدادات</h1>
+                <p>إدارة إعدادات حسابك وتفضيلاتك</p>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Settings -->
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>معلومات الحساب</h3>
+                        <p>تحديث معلوماتك الشخصية</p>
+                    </div>
+                    <div class="card-content">
+                        <form id="profile-form" class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الاسم الأول</label>
+                                    <input type="text" id="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>الاسم الأخير</label>
+                                    <input type="text" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>البريد الإلكتروني</label>
+                                <input type="email" id="email" readonly>
+                                <small>لا يمكن تغيير البريد الإلكتروني</small>
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الهاتف</label>
+                                <input type="tel" id="phone" placeholder="+20 123 456 7890">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                حفظ التغييرات
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Password Settings -->
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>تغيير كلمة المرور</h3>
+                        <p>تحديث كلمة المرور الخاصة بك</p>
+                    </div>
+                    <div class="card-content">
+                        <form id="password-form" class="settings-form">
+                            <div class="form-group">
+                                <label>كلمة المرور الحالي��</label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label>كلمة المرور الجديدة</label>
+                                <input type="password" id="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label>تأكيد كلمة المرور الجديدة</label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key"></i>
+                                تحديث كلمة المرور
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Plan Settings -->
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>الخطة الحالية</h3>
+                        <p>تفاصيل خطتك الحالية</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="plan-info">
+                            <div class="plan-details">
+                                <div class="plan-name" id="current-plan">جاري التحميل...</div>
+                                <div class="plan-status" id="plan-status">جاري التحميل...</div>
+                            </div>
+                            <div class="plan-actions">
+                                <button class="btn btn-outline" onclick="window.location.href='/plan-user-choose'">
+                                    <i class="fas fa-arrow-up"></i>
+                                    ترقية الخطة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Settings -->
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>إعدادات الإشعارات</h3>
+                        <p>تخصيص الإشعارات التي تريد استقبالها</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="notification-options">
+                            <div class="notification-option">
+                                <div class="option-info">
+                                    <div class="option-title">تحديثات البوتات</div>
+                                    <div class="option-desc">إشعارات حول حالة البوتات</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="botUpdates" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="notification-option">
+                                <div class="option-info">
+                                    <div class="option-title">النشرة الإخبارية</div>
+                                    <div class="option-desc">تحديثات وأخبار المنصة</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="newsletter">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="saveNotificationSettings()">
+                            <i class="fas fa-save"></i>
+                            حفظ الإعدادات
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="settings-card danger">
+                    <div class="card-header">
+                        <h3>المنطقة الخطرة</h3>
+                        <p>إجراءات لا يمكن التراجع عنها</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <strong>تحذير:</strong> حذف الحساب إجراء لا يمكن التراجع عنه.
+                            </div>
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteAccount()">
+                            <i class="fas fa-trash"></i>
+                            حذف الحساب
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/settings.js"></script>
+</body>
+</html>
