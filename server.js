@@ -459,8 +459,10 @@ mongoose
   .connect(DataBase)
   .then(() => {
     console.log("✅ DataBase is Connected");
-    app.listen(Port, () => console.log(`🚀 Server: http://localhost:${Port}`));
   })
   .catch((error) => {
     console.log("❌ The DataBase is Not Connected", error.message);
   });
+
+module.exports = app; // ⬅️ مهم جدًا لـ Vercel
+
