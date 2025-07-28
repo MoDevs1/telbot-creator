@@ -39,10 +39,32 @@ app.use(
 // CORS configuration for Vercel
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? [process.env.VERCEL_URL, process.env.BASE_URL].filter(Boolean)
-        : ["http://localhost:3000"],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, etc.)
+      if (!origin) return callback(null, true)
+
+      const allowedOrigins = ["http://localhost:3000", "https://localhost:3000"]
+
+      // Add Vercel URLs
+      if (process.env.VERCEL_URL) {
+        allowedOrigins.push(`https://${process.env.VERCEL_URL}`)
+      }
+
+      if (process.env.BASE_URL) {
+        allowedOrigins.push(process.env.BASE_URL)
+      }
+
+      // Allow any vercel.app subdomain
+      if (origin.includes(".vercel.app")) {
+        return callback(null, true)
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+
+      callback(new Error("Not allowed by CORS"))
+    },
     credentials: true,
   }),
 )
@@ -87,7 +109,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
     },
   }),
 )
@@ -307,7 +329,7 @@ app.post("/api/signup", async (req, res) => {
 })
 
 // Email configuration
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.ADMIN_EMAIL,
@@ -560,22 +582,6 @@ const connectDB = async () => {
 
 // Initialize database connection
 connectDB().catch(console.error)
-
-// For Vercel serverless functions
-if (process.env.NODE_ENV !== "production") {
-  const server = app.listen(Port, () => {
-    console.log(`🚀 Server running on port ${Port}`)
-    console.log(`🌐 Environment: ${process.env.NODE_ENV || "development"}`)
-  })
-
-  // Graceful shutdown
-  process.on("SIGTERM", () => {
-    console.log("SIGTERM received")
-    server.close(() => {
-      console.log("Process terminated")
-    })
-  })
-}
 
 // Export for Vercel
 module.exports = app
