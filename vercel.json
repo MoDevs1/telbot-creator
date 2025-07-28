@@ -8,19 +8,19 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/server.js"
+      "destination": "/api/server"
     },
     {
       "source": "/auth/(.*)",
-      "destination": "/server.js"
+      "destination": "/api/server"
     },
     {
       "source": "/admin/(.*)",
-      "destination": "/server.js"
+      "destination": "/api/server"
     },
     {
       "source": "/(.*)",
-      "destination": "/server.js"
+      "destination": "/api/server"
     }
   ],
   "env": {
