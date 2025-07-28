@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>plan-user-choose</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="cursor" class="cursor-custom"></div>
+    <canvas id="particles-canvas"></canvas>
+        <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">خطط الأسعار</h2>
+            <p class="section-subtitle animate-on-scroll">اختر الخطة المناسبة لاحتياجاتك</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card animate-on-scroll">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">المجانية</h3>
+                        <div class="pricing-price">
+                            <span class="price">$0</span>
+                            <span class="period">/مجاناً</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> بوت واحد</li>
+                            <li><i class="fas fa-check"></i> دعم أساسي</li>
+                            <li><i class="fas fa-check"></i> قوالب محدودة</li>
+                        </ul>
+                        <button class="btn btn-pricing" id="chooseFreeBtn">ابدأ مجاناً</button>
+                    </div>
+                </div>
+
+                <div class="pricing-card popular animate-on-scroll">
+                    <div class="popular-badge">الأكثر شعبية</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">المتقدمة</h3>
+                        <div class="pricing-price">
+                            <span class="price">$10</span>
+                            <span class="period">/شهرياً</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 5 بوتات</li>
+                            <li><i class="fas fa-check"></i> دعم متقدم</li>
+                            <li><i class="fas fa-check"></i> جميع القوالب</li>
+                            <li><i class="fas fa-check"></i> تحليلات مفصلة</li>
+                            <li><i class="fas fa-check"></i> API متقدم</li>
+                        </ul>
+                        <button class="btn btn-pricing" id="chooseProBtn">اختر المتقدمة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <script src="/js/script.js"></script>
+        <script src="/js/plan.js"></script>
+</body>
+</html>
