@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - TeleBot Creator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bot-creator.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="creator-body">
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor-custom"></div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="creator-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>TeleBot Creator</span>
+                </div>
+                <div class="breadcrumb">
+                    <a href="bot-creator.html">لوحة التحكم</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>الإعدادات</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">أحمد محمد</span>
+                        <span class="user-plan">الخطة المتقدمة</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="creator-main">
+        <div class="settings-container">
+            <!-- Settings Header -->
+            <div class="settings-header">
+                <h1>الإعدادات</h1>
+                <p>إدارة إعدادات حسابك وتفضيلاتك</p>
+            </div>
+
+            <!-- Settings Navigation -->
+            <div class="settings-layout">
+                <div class="settings-sidebar">
+                    <nav class="settings-nav">
+                        <button class="nav-item active" data-section="general">
+                            <i class="fas fa-user-cog"></i>
+                            <span>عام</span>
+                        </button>
+                        <button class="nav-item" data-section="security">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>الأمان</span>
+                        </button>
+                        <button class="nav-item" data-section="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>الإشعارات</span>
+                        </button>
+                        <button class="nav-item" data-section="billing">
+                            <i class="fas fa-credit-card"></i>
+                            <span>الفواتير</span>
+                        </button>
+                        <button class="nav-item" data-section="api">
+                            <i class="fas fa-code"></i>
+                            <span>API</span>
+                        </button>
+                        <button class="nav-item" data-section="advanced">
+                            <i class="fas fa-cogs"></i>
+                            <span>متقدم</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="settings-content">
+                    <!-- General Settings -->
+                    <div class="settings-section active" id="general">
+                        <div class="section-header">
+                            <h2>الإعدادات العامة</h2>
+                            <p>إدارة معلوماتك الشخصية وتفضيلات الحساب</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- Profile Information -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>معلومات الملف الشخصي</h3>
+                                    <p>تحديث معلوماتك الشخصية</p>
+                                </div>
+                                <div class="card-content">
+                                    <form class="settings-form">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>الاسم الأول</label>
+                                                <input type="text" value="أحمد" placeholder="الاسم الأول">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>الاسم الأخير</label>
+                                                <input type="text" value="محمد علي" placeholder="الاسم الأخير">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>البريد الإلكتروني</label>
+                                            <input type="email" value="ahmed.mohamed@example.com" placeholder="البريد الإلكتروني">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>رقم الهاتف</label>
+                                            <input type="tel" value="+966 50 123 4567" placeholder="رقم الهاتف">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Language & Region -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>اللغة والمنطقة</h3>
+                                    <p>تخصيص تفضيلات اللغة والمنطقة الزمنية</p>
+                                </div>
+                                <div class="card-content">
+                                    <form class="settings-form">
+                                        <div class="form-group">
+                                            <label>اللغة</label>
+                                            <select>
+                                                <option value="ar" selected>العربية</option>
+                                                <option value="en">English</option>
+                                                <option value="fr">Français</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>المنطقة الزمنية</label>
+                                            <select>
+                                                <option value="Asia/Riyadh" selected>الرياض (GMT+3)</option>
+                                                <option value="Asia/Dubai">دبي (GMT+4)</option>
+                                                <option value="Africa/Cairo">القاهرة (GMT+2)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>تنسيق التاريخ</label>
+                                            <select>
+                                                <option value="dd/mm/yyyy" selected>يوم/شهر/سنة</option>
+                                                <option value="mm/dd/yyyy">شهر/يوم/سنة</option>
+                                                <option value="yyyy-mm-dd">سنة-شهر-يوم</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-section" id="security">
+                        <div class="section-header">
+                            <h2>الأمان والخصوصية</h2>
+                            <p>إدارة كلمة المرور وإعدادات الأمان</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- Change Password -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>تغيير كلمة المرور</h3>
+                                    <p>تحديث كلمة المرور الخاصة بك</p>
+                                </div>
+                                <div class="card-content">
+                                    <form class="settings-form">
+                                        <div class="form-group">
+                                            <label>كلمة المرور الحالية</label>
+                                            <input type="password" placeholder="كلمة المرور الحالية">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>كلمة المرور الجديدة</label>
+                                            <input type="password" placeholder="كلمة المرور الجديدة">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>تأكيد كلمة المرور الجديدة</label>
+                                            <input type="password" placeholder="تأكيد كلمة المرور الجديدة">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">تحديث كلمة المرور</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Two-Factor Authentication -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>المصادقة الثنائية</h3>
+                                    <p>تعزيز أمان حسابك بالمصادقة الثنائية</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="security-option">
+                                        <div class="option-info">
+                                            <div class="option-title">المصادقة عبر الرسائل النصية</div>
+                                            <div class="option-desc">استقبال رمز التحقق عبر SMS</div>
+                                        </div>
+                                        <div class="option-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="security-option">
+                                        <div class="option-info">
+                                            <div class="option-title">تطبيق المصادقة</div>
+                                            <div class="option-desc">استخدام Google Authenticator أو تطبيق مشابه</div>
+                                        </div>
+                                        <div class="option-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Login Sessions -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>جلسات تسجيل الدخول</h3>
+                                    <p>إدارة الأجهزة المتصلة بحسابك</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="session-list">
+                                        <div class="session-item current">
+                                            <div class="session-info">
+                                                <div class="session-device">
+                                                    <i class="fas fa-desktop"></i>
+                                                    <span>Chrome على Windows</span>
+                                                </div>
+                                                <div class="session-details">
+                                                    <span class="session-location">الرياض، السعودية</span>
+                                                    <span class="session-time">نشط الآن</span>
+                                                </div>
+                                            </div>
+                                            <span class="session-badge current">الجلسة الحالية</span>
+                                        </div>
+                                        <div class="session-item">
+                                            <div class="session-info">
+                                                <div class="session-device">
+                                                    <i class="fas fa-mobile-alt"></i>
+                                                    <span>Safari على iPhone</span>
+                                                </div>
+                                                <div class="session-details">
+                                                    <span class="session-location">الرياض، السعودية</span>
+                                                    <span class="session-time">منذ 3 أيام</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-outline btn-sm">إنهاء الجلسة</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger">إنهاء جميع الجلسات الأخرى</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings -->
+                    <div class="settings-section" id="notifications">
+                        <div class="section-header">
+                            <h2>إعدادات الإشعارات</h2>
+                            <p>تخصيص الإشعارات التي تريد استقبالها</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- Email Notifications -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>إشعارات البريد الإلكتروني</h3>
+                                    <p>اختر الإشعارات التي تريد استقبالها عبر البريد الإلكتروني</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="notification-options">
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">تحديثات البوتات</div>
+                                                <div class="option-desc">إشعارات حول حالة البوتات والتحديثات</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">تقارير الأداء</div>
+                                                <div class="option-desc">تقارير أسبوعية وشهرية عن أداء البوتات</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">تحديثات الفواتير</div>
+                                                <div class="option-desc">إشعارات حول الفواتير والمدفوعات</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">النشرة الإخبارية</div>
+                                                <div class="option-desc">أخبار المنتج والميزات الجديدة</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Push Notifications -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>الإشعارات الفورية</h3>
+                                    <p>إعدادات الإشعارات الفورية في المتصفح</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="notification-options">
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">تفعيل الإشعارات الفورية</div>
+                                                <div class="option-desc">استقبال إشعارات فورية في المتصفح</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-option">
+                                            <div class="option-info">
+                                                <div class="option-title">أخطاء البوتات</div>
+                                                <div class="option-desc">إشعارات فورية عند حدوث أخطاء</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Settings -->
+                    <div class="settings-section" id="billing">
+                        <div class="section-header">
+                            <h2>إعدادات الفواتير</h2>
+                            <p>إدارة خطتك ومعلومات الدفع</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- Current Plan -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>الخطة الحالية</h3>
+                                    <p>تفاصيل خطتك الحالية والاستخدام</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="plan-details">
+                                        <div class="plan-info">
+                                            <div class="plan-name">الخطة المتقدمة</div>
+                                            <div class="plan-price">$29.00 شهرياً</div>
+                                            <div class="plan-renewal">التجديد التالي: 15 فبراير 2024</div>
+                                        </div>
+                                        <div class="plan-usage">
+                                            <div class="usage-item">
+                                                <span>البوتات المستخدمة</span>
+                                                <span>3 من 5</span>
+                                            </div>
+                                            <div class="usage-item">
+                                                <span>الرسائل الشهرية</span>
+                                                <span>2.5K من 10K</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="plan-actions">
+                                        <button class="btn btn-outline">تغيير الخطة</button>
+                                        <button class="btn btn-danger">إلغاء الاشتراك</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Methods -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>طرق الدفع</h3>
+                                    <p>إدارة بطاقاتك الائتمانية وطرق الدفع</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="payment-methods">
+                                        <div class="payment-method primary">
+                                            <div class="card-info">
+                                                <i class="fab fa-cc-visa"></i>
+                                                <span>•••• •••• •••• 4242</span>
+                                                <span class="card-expiry">12/25</span>
+                                            </div>
+                                            <div class="card-actions">
+                                                <span class="primary-badge">الأساسية</span>
+                                                <button class="btn-icon" title="تعديل">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline">
+                                        <i class="fas fa-plus"></i>
+                                        إضافة طريقة دفع جديدة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API Settings -->
+                    <div class="settings-section" id="api">
+                        <div class="section-header">
+                            <h2>إعدادات API</h2>
+                            <p>إدارة مفاتيح API والوصول للمطورين</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- API Keys -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>مفاتيح API</h3>
+                                    <p>إنشاء وإدارة مفاتيح API للتطبيقات الخارجية</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="api-keys">
+                                        <div class="api-key-item">
+                                            <div class="key-info">
+                                                <div class="key-name">Production API Key</div>
+                                                <div class="key-value">tb_live_••••••••••••••••••••••••••••••••</div>
+                                                <div class="key-created">تم الإنشاء: 15 يناير 2024</div>
+                                            </div>
+                                            <div class="key-actions">
+                                                <button class="btn-icon" title="نسخ">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                                <button class="btn-icon" title="حذف">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                        إنشاء مفتاح API جديد
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Webhooks -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>Webhooks</h3>
+                                    <p>تكوين webhooks لاستقبال الأحداث</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="webhook-list">
+                                        <div class="empty-state">
+                                            <i class="fas fa-webhook"></i>
+                                            <p>لا ت��جد webhooks مكونة</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline">
+                                        <i class="fas fa-plus"></i>
+                                        إضافة Webhook
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Settings -->
+                    <div class="settings-section" id="advanced">
+                        <div class="section-header">
+                            <h2>الإعدادات المتقدمة</h2>
+                            <p>إعدادات متقدمة وخيارات المطورين</p>
+                        </div>
+
+                        <div class="settings-cards">
+                            <!-- Data Export -->
+                            <div class="settings-card">
+                                <div class="card-header">
+                                    <h3>تصدير البيانات</h3>
+                                    <p>تحميل نسخة من بياناتك</p>
+                                </div>
+                                <div class="card-content">
+                                    <p>يمكنك طلب نسخة من جميع بياناتك المخزنة في حسابك.</p>
+                                    <button class="btn btn-outline">طلب تصدير البيانات</button>
+                                </div>
+                            </div>
+
+                            <!-- Delete Account -->
+                            <div class="settings-card danger">
+                                <div class="card-header">
+                                    <h3>حذف الحساب</h3>
+                                    <p>حذف حسابك وجميع البيانات المرتبطة به نهائياً</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="warning-box">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div>
+                                            <strong>تحذير:</strong> هذا الإجراء لا يمكن التراجع عنه. سيتم حذف جميع البوتات والبيانات نهائياً.
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger">حذف الحساب</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/bot-creator.js"></script>
+    <script src="/js/settings.js"></script>
+</body>
+</html>
