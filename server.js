@@ -117,8 +117,7 @@ passport.use(
 // 📦 إعدادات Express
 app.use(express.json());
 app.use("/api", botRoutes);
-app.use("/css", express.static(path.join(__dirname, "css")));
-app.use("/js", express.static(path.join(__dirname, "js")));
+//
 app.use(express.static(path.join(__dirname, "public")));
 
 // 📄 صفحات HTML
